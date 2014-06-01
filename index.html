@@ -13,7 +13,7 @@
 <script>
     var mouse1, mouse2;
     var imgs = ['cp24.jpg', 'hockey.jpg', 'discovery.jpg'];
-    var guide = 'trans.png';
+    var guide = 'guide.png';
     var info = 'trans.png';
     var imcnt = 0;
     var vol = 10;
@@ -34,7 +34,8 @@
         console.log(co);
         
         if(Math.abs(difx) < 10 && Math.abs(dify) < 10){ //click
-            var guideOn = document.getElementById('tv').src == guide;
+            a = document.getElementById('tv').src.split('/');
+            var guideOn = a[a.length-1] == guide;
             document.getElementById('tv').src = guideOn ? 'trans.png' : guide;
         }else if (Math.abs(dify) > 50){ //drag vertically
             if(!volumeMode){
@@ -73,7 +74,8 @@
                     document.getElementById('vol').style.display = 'none';
                 }
                 else{
-                    var infoOn = document.getElementById('tv').src == info;
+                    a = document.getElementById('tv').src.split('/');
+                    var guideOn = a[a.length-1] == info;
                     document.getElementById('tv').src = infoOn ? 'trans.png' : info;
                 }
             }else{
@@ -127,7 +129,7 @@
     <img id="tv" style="border:10px solid black;" src=""></img>
     <script>
         tv = document.getElementById('tv');
-        tv.src = guide;
+        tv.src = "trans.png";
         document.getElementById('tvdiv').setAttribute("style", "background-image:url("+imgs[Math.abs(imcnt)]+"); background-repeat:no-repeat;"); 
     </script>
     </div>
