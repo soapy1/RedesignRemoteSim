@@ -14,7 +14,7 @@
     var mouse1, mouse2;
     var imgs = ['cp24.jpg', 'hockey.jpg', 'discovery.jpg'];
     var guide = 'guide.png';
-    var info = 'trans.png';
+    var info = 'info.png';
     var imcnt = 0;
     var vol = 10;
     var volumeMode = false;
@@ -75,7 +75,7 @@
                 }
                 else{
                     a = document.getElementById('tv').src.split('/');
-                    var guideOn = a[a.length-1] == info;
+                    var infoOn = a[a.length-1] == info;
                     document.getElementById('tv').src = infoOn ? 'trans.png' : info;
                 }
             }else{
