@@ -5,6 +5,8 @@
 
 <script>
     var mouse1, mouse2;
+    var imgs = ['cp24.jpg', 'hockey.jpg', 'discovery.jpg'];
+    var imcnt = 0;
 
     function getMousePosition(can, evt){
         var bounds = can.getBoundingClientRect();
@@ -23,8 +25,14 @@
         if (Math.abs(difx) > 50){
             if (difx > 0){
                 console.log('drag right');
+                imcnt = (imcnt+1)%3
+                console.log(imcnt)
+                document.getElementById('tv').src = imgs[Math.abs(imcnt)] 
             }else{
                 console.log('drag left');
+                imcnt = (imcnt-1)%3
+                console.log(imcnt)
+                document.getElementById('tv').src = imgs[Math.abs(imcnt)] 
             }
         }else if (Math.abs(dify) >50){
             if (dify > 0){
@@ -48,7 +56,7 @@
       var imageObj = new Image();
 
       imageObj.onload = function() {
-        context.drawImage(imageObj, 0, 50);
+        context.drawImage(imageObj, 0, 20);
       };
       imageObj.src = 'remotetrack.png';
 
@@ -67,9 +75,14 @@
 </div>
 </div>
 
-<div class="col-md-4">
+<div class="col-md-8">
 <h2>Television</h2>
-<img src=""></img>
+<br>
+<img id="tv" style="border:10px solid black;" src=""></img>
+<script>
+    tv = document.getElementById('tv');
+    tv.src = imgs[0];
+</script>
 </div>
 </body>
 
