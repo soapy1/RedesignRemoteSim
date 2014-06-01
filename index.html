@@ -6,6 +6,7 @@
 <script>
     var mouse1, mouse2;
     var imgs = ['cp24.jpg', 'hockey.jpg', 'discovery.jpg'];
+    var guide = 'img';
     var imcnt = 0;
     var vol = 10;
 
@@ -22,31 +23,36 @@
         dify = mouse1.y-mouse2.y;
         co = {x: difx, y:dify};
         console.log(co);
-
-        if (Math.abs(difx) > 50){
-            if (difx > 0){
-                console.log('drag right');
-                imcnt = (imcnt+1)%3
-                console.log(imcnt)
-                document.getElementById('tv').src = imgs[Math.abs(imcnt)] 
-            }else{
-                console.log('drag left');
-                imcnt = (imcnt+2)%3
-                console.log(imcnt)
-                document.getElementById('tv').src = imgs[Math.abs(imcnt)] 
-            }
-        }else if (Math.abs(dify) >50){
+        
+        if(Math.abs(difx) < 10 && Math.abs(dify) < 10){
+            var guideOn = document.getElementById('tv').src == guide;
+            document.getElementById('tv').src = guideOn ? '' : guide;
+        }else if (Math.abs(dify) > 50){
             if (dify > 0){
                 console.log('drag up');
-                vol += Math.round(dify/10);
-                document.getElementById('vol').innerHTML = "VOL: " + vol;
+                imcnt = (imcnt+1)%3
+                console.log(imcnt)
+                document.getElementById('tv').background = imgs[Math.abs(imcnt)] 
             }else{
                 console.log('drag down');
+                imcnt = (imcnt+2)%3
+                console.log(imcnt)
+                document.getElementById('tv').background = imgs[Math.abs(imcnt)] 
+            }
+        }else if (Math.abs(difx) >50){
+            if (difx > 0){
+                console.log('drag right');
+                var guideOn = document.getElementById('tv').src == guide;
+                document.getElementById('tv').src = guideOn ? '' : guide;
+            }else{
+                console.log('drag left');
                 vol += Math.round(dify/10);
                 if (vol < 0){
                     vol = 0;
                 }
                 document.getElementById('vol').innerHTML = "VOL: " + vol;
+                //vol += Math.round(dify/10);
+                //document.getElementById('vol').innerHTML = "VOL: " + vol;
             }
         }
     }
@@ -92,7 +98,7 @@
 <img id="tv" style="border:10px solid black;" src=""></img>
 <script>
     tv = document.getElementById('tv');
-    tv.src = imgs[0];
+    tv.background = imgs[0];
 </script>
 <h4 id="vol">VOL: 10</h4>
 </div>
