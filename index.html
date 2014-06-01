@@ -74,15 +74,22 @@
                     document.getElementById('vol').style.display = 'none';
                 }
                 else{
-                    a = document.getElementById('tv').src.split('/');
+                    var a = document.getElementById('tv').src.split('/');
                     var infoOn = a[a.length-1] == info;
                     document.getElementById('tv').src = infoOn ? 'trans.png' : info;
                 }
             }else{
                 console.log('drag left');
-                volumeMode = !volumeMode; //toggle volume mode
-                document.getElementById('vol').style.display = volumeMode ? 'block' : 'none';
-                document.getElementById('tv').src = 'trans.png'; //turn info off
+                var a = document.getElementById('tv').src.split('/');
+                var infoOn = a[a.length-1] == info;
+                console.log(infoOn);
+                if(infoOn){
+                    document.getElementById('tv').src = 'trans.png'; //turn info off
+                }
+                else{
+                    volumeMode = !volumeMode; //toggle volume mode
+                    document.getElementById('vol').style.display = volumeMode ? 'block' : 'none';
+                }
             }
         }
     }
