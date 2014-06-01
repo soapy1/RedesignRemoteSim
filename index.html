@@ -1,0 +1,76 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<script>
+    var mouse1, mouse2;
+
+    function getMousePosition(can, evt){
+        var bounds = can.getBoundingClientRect();
+        return {
+            x: evt.clientX - bounds.left,
+            y: evt.clientY - bounds.top
+        };
+    }
+
+    function calcdiff(){
+        difx = mouse2.x-mouse1.x;
+        dify = mouse1.y-mouse2.y;
+        co = {x: difx, y:dify};
+        console.log(co);
+
+        if (Math.abs(difx) > 50){
+            if (difx > 0){
+                console.log('drag right');
+            }else{
+                console.log('drag left');
+            }
+        }else if (Math.abs(dify) >50){
+            if (dify > 0){
+                console.log('drag up');
+            }else{
+                console.log('drag down');
+            }
+        }
+    }
+</script>
+</head>
+
+<body style="background-color:#e7e7e7">
+<h1>Redesigned Rogers Remote Trackpad Simulation</h1>
+<div class="col-md-4">
+<h2>Remote Trackpad</h2>
+    <canvas id="pad" width="578" height="400"></canvas>
+    <script>
+      var canvas = document.getElementById('pad');
+      var context = canvas.getContext('2d');
+      var imageObj = new Image();
+
+      imageObj.onload = function() {
+        context.drawImage(imageObj, 0, 50);
+      };
+      imageObj.src = 'remotetrack.png';
+
+    // Keep track of the user clicking on the track pad
+    canvas.addEventListener('mousedown', function(ev){
+        var mouse = getMousePosition(canvas, ev);
+        mouse1 = mouse;
+    });
+    canvas.addEventListener('mouseup', function(ev){
+        var mouse = getMousePosition(canvas, ev);
+        mouse2 = mouse;
+        // now ready to do something useful
+        calcdiff();     
+    });
+    </script>
+</div>
+</div>
+
+<div class="col-md-4">
+<h2>Television</h2>
+<img src=""></img>
+</div>
+</body>
+
+</html>
